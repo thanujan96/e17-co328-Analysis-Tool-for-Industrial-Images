@@ -7,14 +7,7 @@ import { Title } from "../title.js";
 
 export const MachinePage = ({ machineData }) => {
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8,
-        paddingTop: 3,
-      }}
-    >
+    <Box component="main">
       <Container maxWidth={false}>
         <Grid
           container
@@ -37,17 +30,19 @@ export const MachinePage = ({ machineData }) => {
               return (
                 <Grid
                   item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  xl={3}
+                  // xs={12}
+                  sm={2}
+                  md={2}
+                  lg={2}
+                  xl={1}
                   key={index}
                   sx={{
                     alignItems: "center",
                     justifyContents: "center",
-                    minWidth: 290,
-                    marginBottom: 5,
+                    maxWidth: 100,
+                    marginBottom: 2,
+                    margin: 0,
+                    padding: 0,
                   }}
                 >
                   <Link

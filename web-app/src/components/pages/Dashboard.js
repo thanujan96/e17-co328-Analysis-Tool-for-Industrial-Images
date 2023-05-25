@@ -10,10 +10,26 @@ import { MachineInfoPage } from "./MachineinfoPage.js";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../../404.js";
 
-const { io } = require("socket.io-client");
-const socket = io(process.env.REACT_APP_SERVER_BASE_URL, {
-  transports: ["websocket"],
-});
+// const { io } = require("socket.io-client");
+// const socket = io(process.env.REACT_APP_SERVER_BASE_URL, {
+//   transports: ["websocket"],
+// });
+
+var machineDumbData = [];
+var moldMake = ["ALEX", "TET", "TONY", "MONA"];
+var moldMat = ["HIPS", "ABS", "ABS-CLEAR", "SAN"];
+for (let index = 0; index < 24; index++) {
+  machineDumbData.push({
+    machineID: index.toString(),
+    monaNumber: "#132" + index.toString(),
+    moldID: "QXO43" + index.toString(),
+    moldShots: 12 + index,
+    failedShots: 2 + (index % 5),
+    prodRate: 12 + index,
+    material: moldMat[index % 4],
+    moldMaker: moldMake[index % 4],
+  });
+}
 
 export default function Dashboard(props) {
   const [machineData, setMachineData] = useState([]);
@@ -22,33 +38,33 @@ export default function Dashboard(props) {
   //   document.title = "Dashboard";
   // }, [props.title]);
 
-  useEffect(() => {
-    socket.on("connect_error", (err) => {
-      console.log(`connect_error due to ${err.message}`);
-    });
+  // useEffect(() => {
+  //   socket.on("connect_error", (err) => {
+  //     console.log(`connect_error due to ${err.message}`);
+  //   });
 
-    socket.on("machines", (data) => {
-      data[0].status = "Online";
-      console.log(data);
-      setMachineData(data);
-    });
-  });
+  //   socket.on("machines", (data) => {
+  //     data[0].status = "Online";
+  //     console.log(data);
+  //     setMachineData(data);
+  //   });
+  // });
   // i don't want these mesy structre
 
   return (
-    <DashboardLayout title={"hi"} machineData={machineData}>
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={<MachinePage machineData={machineData} />}
-        />
-        <Route
-          path="/machines/:ID"
-          element={<MachineInfoPage machineData={machineData} />}
-        />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </DashboardLayout>
+    // <DashboardLayout title={""} machineData={machineDumbData}>
+    <Routes>
+      <Route
+        exact
+        path="/"
+        element={<MachinePage machineData={machineDumbData} />}
+      />
+      <Route
+        path="/machines/:ID"
+        element={<MachineInfoPage machineData={machineDumbData} />}
+      />
+      <Route path="/*" element={<NotFound />} />
+    </Routes>
+    // </DashboardLayout>
   );
 }

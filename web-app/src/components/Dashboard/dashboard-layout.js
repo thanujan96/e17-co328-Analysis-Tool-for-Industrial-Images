@@ -18,7 +18,7 @@ const DashboardLayoutRoot = styled("div")(({ theme }) => ({
 
 export const DashboardLayout = (props) => {
   const { children, ...rest } = props;
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
@@ -35,10 +35,7 @@ export const DashboardLayout = (props) => {
         </Box>
       </DashboardLayoutRoot>
       {/* <DashboardNavbar onSidebarOpen={() => setSidebarOpen(true)} /> */}
-      <DashboardSidebar
-        onClose={() => setSidebarOpen(false)}
-        open={isSidebarOpen}
-      />
+      <DashboardSidebar onClose={() => setSidebarOpen(false)} open={false} />
     </>
   );
 };

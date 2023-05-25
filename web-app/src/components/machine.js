@@ -21,9 +21,10 @@ import {
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { MachineWithNumber } from "./machineIcon";
 
 export const Machine = (props) => {
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const {
     machineId,
     moldId,
@@ -41,11 +42,11 @@ export const Machine = (props) => {
     ...others
   } = props;
 
-  if (status != "online") {
-    setError(true);
-  } else {
-    setError(false);
-  }
+  // if (status != "online") {
+  //   setError(true);
+  // } else {
+  //   setError(false);
+  // }
   return (
     <Card
       variant="outlined"
@@ -54,14 +55,20 @@ export const Machine = (props) => {
         padding: 0,
         borderWidth: 3,
         maxWidth: 260,
-        backgroundColor: "red",
+        maxHeight: 140,
       }}
-      {...others}
     >
-      <CardContent alignItems="center" justifyContent="center">
+      <CardContent
+        alignItems="center"
+        justifyContent="center"
+        sx={{
+          margin: 0,
+          padding: 0,
+        }}
+      >
         <Grid>
           {/* machine id header*/}
-          <Grid
+          {/* <Grid
             item
             xs={12}
             spacing={4}
@@ -73,8 +80,8 @@ export const Machine = (props) => {
               alignItems="center"
               justifyContent={"space-around"}
               sx={{ backgroundColor: "primary" }}
-            >
-              <Grid item margin={2}>
+            > */}
+          {/* <Grid item margin={2}>
                 <Avatar
                   sx={{
                     height: 56,
@@ -84,8 +91,8 @@ export const Machine = (props) => {
                 >
                   <PrecisionManufacturingIcon />
                 </Avatar>
-              </Grid>
-              <Grid item>
+              </Grid> */}
+          {/* <Grid item>
                 <Typography
                   color="textSecondary"
                   gutterBottom
@@ -104,42 +111,99 @@ export const Machine = (props) => {
                 >
                   {moldId}
                 </Typography>
+              </Grid> */}
+          {/* </Grid>
+          </Grid> */}
+          <Grid container>
+            <Grid
+              xs={2}
+              alignItems="center"
+              justifyContent="center"
+              // sx={{ backgroundColor: "red" }}
+            >
+              <Grid alignItems="end" justifyContent="center">
+                <Typography
+                  variant="h6"
+                  padding={1}
+                  paddingTop={1}
+                  color="textSecondary"
+                >
+                  <MachineWithNumber count={machineId} />
+                  {/* M{machineId} */}
+                </Typography>
               </Grid>
             </Grid>
-          </Grid>
-          {/* mold deltails */}
-          <Grid item textAlign="center" xs={12} padding={1}>
             <Grid
-              container
               alignItems="center"
-              justifyContent={"end"}
-              spacing={2}
+              justifyContent="end"
+              xs={10}
+              // sx={{ backgroundColor: "red" }}
             >
-              <Grid item>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  textAlign="left"
-                  color="black"
+              <Grid item textAlign="center" xs={12} padding={1}>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent={"end"}
+                  spacing={2}
                 >
-                  <Chip label={material} color="info" />
-                </Typography>
+                  <Grid item>
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      textAlign="left"
+                      color="black"
+                    >
+                      {moldId}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      textAlign="left"
+                      color="black"
+                    >
+                      {monaNumber}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  textAlign="left"
-                  color="black"
+
+              {/* mold deltails */}
+              <Grid item textAlign="center" xs={12} margin={0} padding={1}>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent={"end"}
+                  spacing={2}
                 >
-                  <Chip label={moldMaker} color="primary" />
-                </Typography>
+                  <Grid item>
+                    <Typography
+                      variant="h7"
+                      component="div"
+                      textAlign="left"
+                      color="black"
+                    >
+                      <Chip label={material} color="info" />
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      textAlign="left"
+                      color="black"
+                    >
+                      <Chip label={moldMaker} color="primary" />
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
 
           {/* statistics */}
-          <Grid item xs={12}>
+          <Grid item xs={12} margin={0}>
             <Grid
               container
               direction="row"

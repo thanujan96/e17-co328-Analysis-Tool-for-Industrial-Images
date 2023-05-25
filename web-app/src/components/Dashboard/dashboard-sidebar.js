@@ -122,12 +122,31 @@ export const DashboardSidebar = (props) => {
       </Box>
     </>
   );
+  if (open) {
+    if (lgUp) {
+      return (
+        <Drawer
+          anchor="left"
+          open={open}
+          PaperProps={{
+            sx: {
+              backgroundColor: "neutral.900",
+              color: "#FFFFFF",
+              width: 280,
+            },
+          }}
+          variant="permanent"
+        >
+          {content}
+        </Drawer>
+      );
+    }
 
-  if (lgUp) {
     return (
       <Drawer
         anchor="left"
-        open
+        onClose={onClose}
+        open={open}
         PaperProps={{
           sx: {
             backgroundColor: "neutral.900",
@@ -135,31 +154,15 @@ export const DashboardSidebar = (props) => {
             width: 280,
           },
         }}
-        variant="permanent"
+        sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
+        variant="temporary"
       >
         {content}
       </Drawer>
     );
+  } else {
+    return <div></div>;
   }
-
-  return (
-    <Drawer
-      anchor="left"
-      onClose={onClose}
-      open={open}
-      PaperProps={{
-        sx: {
-          backgroundColor: "neutral.900",
-          color: "#FFFFFF",
-          width: 280,
-        },
-      }}
-      sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
-      variant="temporary"
-    >
-      {content}
-    </Drawer>
-  );
 };
 
 // DashboardSidebar.propTypes = {
